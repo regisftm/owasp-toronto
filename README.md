@@ -86,16 +86,12 @@ subgraph Cluster
     subgraph kube-System
         G[Pods\nk8s-app == core-dns ]
     end
-end
-```
-
-
-    A[load\n generator] -->|egress\n UDP 53| C[Pods\nk8s-app == core-dns ]
-    B[vote] -->|egress\n UDP 53| C[Pods\nk8s-app == core-dns ]
-    C[redis] -->|egress\n UDP 53| C[Pods\nk8s-app == core-dns ]
-    D[worker] -->|egress\n UDP 53| C[Pods\nk8s-app == core-dns ]
-    E[db] -->|egress\n UDP 53| C[Pods\nk8s-app == core-dns ]
-    F[result] -->|egress\n UDP 53| C[Pods\nk8s-app == core-dns ]
+    A[load\n generator] -->|egress\n UDP 53| G[Pods\nk8s-app == core-dns ]
+    B[vote] -->|egress\n UDP 53| G[Pods\nk8s-app == core-dns ]
+    C[redis] -->|egress\n UDP 53| G[Pods\nk8s-app == core-dns ]
+    D[worker] -->|egress\n UDP 53| G[Pods\nk8s-app == core-dns ]
+    E[db] -->|egress\n UDP 53| G[Pods\nk8s-app == core-dns ]
+    F[result] -->|egress\n UDP 53| G[Pods\nk8s-app == core-dns ]
 end
 subgraph The Internet
     A[load\n generator] <--|ingress| Z[clients]
