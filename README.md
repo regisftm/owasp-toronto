@@ -83,12 +83,13 @@ subgraph Cluster
         E[db]
         F[result]
     end
-end
-```
-
     subgraph kube-System
         C[Pods\nk8s-app == core-dns ]
     end
+end
+```
+
+
     A[load\n generator] -->|egress\n UDP 53| C[Pods\nk8s-app == core-dns ]
     B[vote] -->|egress\n UDP 53| C[Pods\nk8s-app == core-dns ]
     C[redis] -->|egress\n UDP 53| C[Pods\nk8s-app == core-dns ]
