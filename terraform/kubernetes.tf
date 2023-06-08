@@ -48,7 +48,7 @@ resource "aws_vpc_security_group_ingress_rule" "local" {
   }
 }
 
-resource "aws_vpc_security_group_ingress_rule" "local" {
+resource "aws_vpc_security_group_ingress_rule" "k8s_ippool" {
   security_group_id = aws_security_group.sg_allow_k8s.id
 
   cidr_ipv4   = "192.168.0.0/16"
