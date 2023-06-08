@@ -48,7 +48,56 @@ git clone https://github.com/regisftm/website.git
 
 ---
 
+he following image is an illustration for `deny-app-policy`:
+```mermaid
+flowchart LR
+subgraph Cluster
+    subgraph namespace a
+        A[Pods]
+    end
+    subgraph namespace b
+        B[Pods]
+    end
+    subgraph kube-System
+        C[Pods\nk8s-app == core-dns ]
+    end
+    A[Pods] -->|egress\n UDP 53| C[Pods\nk8s-app == core-dns ]
+    B[Pods] -->|egress\n UDP 53| C[Pods\nk8s-app == core-dns ]
+    A[Pods] x--x|ingress\negress| B[Pods]
+end
+subgraph External resources
+    A[Pods] x--x|ingress\negress| Z[The Internet]
+    B[Pods] x--x|ingress\negress| Z[The Internet]
+    Z[The Internet]
+end
+```
 
-
+```mermaid
+flowchart LR
+subgraph Cluster
+    subgraph namespace vote
+        A[load\n generator]
+        B[vote]
+        C[redis]
+        D[worker]
+        E[db]
+        F[result]
+    end
+    subgraph kube-System
+        C[Pods\nk8s-app == core-dns ]
+    end
+    A[load\n generator] -->|egress\n UDP 53| C[Pods\nk8s-app == core-dns ]
+    B[vote] -->|egress\n UDP 53| C[Pods\nk8s-app == core-dns ]
+    C[redis] -->|egress\n UDP 53| C[Pods\nk8s-app == core-dns ]
+    D[worker] -->|egress\n UDP 53| C[Pods\nk8s-app == core-dns ]
+    E[db] -->|egress\n UDP 53| C[Pods\nk8s-app == core-dns ]
+    F[result] -->|egress\n UDP 53| C[Pods\nk8s-app == core-dns ]
+end
+subgraph The Internet
+    A[load\n generator] <--|ingress| Z[clients]
+    F[result] <--|ingress| Z[clients]
+    Z[clients]
+end
+```
 
 
