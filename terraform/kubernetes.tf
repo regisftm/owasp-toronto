@@ -196,7 +196,7 @@ resource "aws_instance" "control_plane" {
     sudo chown $(id -u):$(id -g) $HOME/.kube/config
     
     # Install Calico CNI
-    kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.26.0/manifests/tigera-operator.yaml
+    # kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.26.0/manifests/tigera-operator.yaml
     # kubectl apply -f https://raw.githubusercontent.com/projectcalico/calico/v3.26.0/manifests/calico.yaml
     
     # Remove the taint from controlplane
@@ -204,6 +204,9 @@ resource "aws_instance" "control_plane" {
     
     echo "### COMMAND TO ADD A WORKER NODE ###"
     kubeadm token create --print-join-command --ttl 0
+
+    # Install docker.io
+    sudo apt-get install -y docker.io
 
     # Install k9s
     curl -OL https://github.com/derailed/k9s/releases/download/v0.27.4/k9s_Linux_amd64.tar.gz

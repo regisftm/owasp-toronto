@@ -1,0 +1,270 @@
+# Example Voting App
+#
+# A simple distributed application running across multiple Docker containers.
+# Source at: https://github.com/dockersamples/example-voting-app
+#
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: vote
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: db
+  name: db
+  namespace: vote
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: db
+  template:
+    metadata:
+      labels:
+        app: db
+    spec:
+      containers:
+      - image: postgres:15-alpine
+        name: postgres
+        env:
+        - name: POSTGRES_USER
+          value: postgres
+        - name: POSTGRES_PASSWORD
+          value: postgres
+        ports:
+        - containerPort: 5432
+          name: postgres
+        volumeMounts:
+        - mountPath: /var/lib/postgresql/data
+          name: db-data
+      volumes:
+      - name: db-data
+        emptyDir: {} 
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: db
+  name: db
+  namespace: vote
+spec:
+  type: ClusterIP
+  ports:
+  - name: "db-service"
+    port: 5432
+    targetPort: 5432
+  selector:
+    app: db
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: redis
+  name: redis
+  namespace: vote
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: redis
+  template:
+    metadata:
+      labels:
+        app: redis
+    spec:
+      containers:
+      - image: redis:alpine
+        name: redis
+        ports:
+        - containerPort: 6379
+          name: redis
+        volumeMounts:
+        - mountPath: /data
+          name: redis-data
+      volumes:
+      - name: redis-data
+        emptyDir: {} 
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: redis
+  name: redis
+  namespace: vote
+spec:
+  type: ClusterIP
+  ports:
+  - name: "redis-service"
+    port: 6379
+    targetPort: 6379
+  selector:
+    app: redis
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: worker
+  name: worker
+  namespace: vote
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: worker
+  template:
+    metadata:
+      labels:
+        app: worker
+    spec:
+      containers:
+      - image: dockersamples/examplevotingapp_worker
+        name: worker
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: vote
+  name: vote
+  namespace: vote
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: vote
+  template:
+    metadata:
+      labels:
+        app: vote
+    spec:
+      containers:
+      - image: dockersamples/examplevotingapp_vote
+        name: vote
+        ports:
+        - containerPort: 80
+          name: vote
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: vote
+  name: vote
+  namespace: vote
+spec:
+  type: NodePort
+  ports:
+  - name: "vote-service"
+    port: 80
+    targetPort: 80
+    nodePort: 30080
+  selector:
+    app: vote
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: result
+  name: result
+  namespace: vote
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: result
+  template:
+    metadata:
+      labels:
+        app: result
+    spec:
+      containers:
+      - image: dockersamples/examplevotingapp_result
+        name: result
+        ports:
+        - containerPort: 80
+          name: result
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: result
+  name: result
+  namespace: vote
+  annotations:
+    projectcalico.org/l7-logging: 'true'
+spec:
+  type: NodePort
+  ports:
+  - name: "result-service"
+    port: 80
+    targetPort: 80
+    nodePort: 30081
+  selector:
+    app: result
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: loadgenerator-cm
+  namespace: vote
+data:
+  loadgen.sh: |
+    #!/bin/sh
+    if [ $((RANDOM % 2)) -eq 0 ]
+      then
+        curl -X POST -d "vote=a" http://vote
+      else
+        curl -X POST -d "vote=b" http://vote
+    fi
+    curl http://result
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: loadgenerator
+  name: loadgenerator
+  namespace: vote
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: loadgenerator
+  template:
+    metadata:
+      labels:
+        app: loadgenerator
+    spec:
+      containers:
+      - name: loadgenerator
+        image: alpine
+        command: ["/bin/sh", "-c"]
+        args: ["while true; do /bin/sh /tmp/loadgen.sh; sleep 5; done"]
+        volumeMounts:
+        - name: config-volume
+          mountPath: /tmp
+        startupProbe:
+          exec:
+            command:
+            - /bin/sh
+            - -c
+            - "apk add curl"
+          failureThreshold: 5
+          successThreshold: 1
+          timeoutSeconds: 15
+          initialDelaySeconds: 0
+          periodSeconds: 5
+      volumes:
+        - name: config-volume
+          configMap:
+            name: loadgenerator-cm
+            optional: false
