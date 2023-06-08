@@ -27,3 +27,9 @@ variable "wk_instance_type" {
   default     = "t3.medium"
   description = "Instance type used for worker node EC2 instance"
 }
+
+variable "wk_instance_count" {
+  type        = number
+  default     = 1
+  description = "Number of Instances for worker node(s) EC2 instance"
+}

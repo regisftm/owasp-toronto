@@ -30,7 +30,7 @@ resource "aws_key_pair" "ssh_key_pair" {
 # EC2 Instances creation
 ###############################################################################
 
-# Security Group creation for Kubernetes nodes
+# Security Groups creation for Kubernetes nodes
 
 resource "aws_security_group" "sg_allow_k8s" {
   name        = "${var.prefix}-allow-k8s"
@@ -45,6 +45,17 @@ resource "aws_vpc_security_group_ingress_rule" "local" {
 
   tags = {
     Name = "${var.prefix}-k8s-ingress-rule-local"
+  }
+}
+
+resource "aws_vpc_security_group_ingress_rule" "local" {
+  security_group_id = aws_security_group.sg_allow_k8s.id
+
+  cidr_ipv4   = "192.168.0.0/16"
+  ip_protocol = "-1"
+
+  tags = {
+    Name = "${var.prefix}-k8s-ingress-rule-k8s-ippool"
   }
 }
 
@@ -85,11 +96,14 @@ resource "aws_vpc_security_group_egress_rule" "allow_all" {
   }  
 }
 
+### EC2 Instances creation for Kubernetes nodes
+
 resource "aws_instance" "control_plane" {
   ami                    = data.aws_ami.ubuntu.id
   instance_type          = var.cp_instance_type
   key_name               = aws_key_pair.ssh_key_pair.key_name
   vpc_security_group_ids = [aws_security_group.sg_allow_k8s.id]
+  source_dest_check      = false
 
   root_block_device {
     volume_size = 16
@@ -182,7 +196,8 @@ resource "aws_instance" "control_plane" {
     sudo chown $(id -u):$(id -g) $HOME/.kube/config
     
     # Install Calico CNI
-    kubectl apply -f https://raw.githubusercontent.com/projectcalico/calico/v3.26.0/manifests/calico.yaml
+    kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.26.0/manifests/tigera-operator.yaml
+    # kubectl apply -f https://raw.githubusercontent.com/projectcalico/calico/v3.26.0/manifests/calico.yaml
     
     # Remove the taint from controlplane
     kubectl taint nodes --all node-role.kubernetes.io/control-plane-
@@ -201,7 +216,7 @@ resource "aws_instance" "control_plane" {
     mv ./tigera-scanner /usr/local/bin/
 
   EOFF
-
+ 
   connection {
     type        = "ssh"
     host        = self.public_ip
@@ -227,7 +242,9 @@ resource "aws_instance" "worker" {
   instance_type          = var.wk_instance_type
   key_name               = aws_key_pair.ssh_key_pair.key_name
   vpc_security_group_ids = [aws_security_group.sg_allow_k8s.id]
-  count                  = 2 
+  source_dest_check      = false
+  count                  = var.wk_instance_count
+
 
   root_block_device {
     volume_size = 16

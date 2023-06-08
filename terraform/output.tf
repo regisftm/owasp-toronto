@@ -6,6 +6,6 @@ locals {
   worker_public_ips = [for i in aws_instance.worker : i.public_ip]
 }
 
-output "worker_public_ip_single" {
+output "workers_public_ips" {
   value = { for i, ip in local.worker_public_ips : "worker-${format("%02d", i + 1)}" => ip }
 }
