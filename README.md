@@ -84,7 +84,7 @@ subgraph Cluster
         F[result]
     end
     subgraph kube-System
-        C[Pods\nk8s-app == core-dns ]
+        G[Pods\nk8s-app == core-dns ]
     end
 end
 ```
