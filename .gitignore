@@ -5,3 +5,4 @@ terraform/.terraform/
 *.hcl
 *.backup
 *.tfstate.*
+owasp-key*.*

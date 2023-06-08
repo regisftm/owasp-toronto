@@ -1,6 +1,10 @@
 Initial project
 
+Terraform
 
+cat /var/log/cloud-init-output.log
+
+---
 
 Calico Installation
 
@@ -34,14 +38,15 @@ spec: {}
 EOF
 ```
 
-
-
+---
 
 Image scanner
 
 ```bash
 git clone https://github.com/regisftm/website.git
 ```
+
+---
 
 
 
