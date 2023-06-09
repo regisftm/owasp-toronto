@@ -54,8 +54,8 @@ flowchart TD
 subgraph The Internet
     Z[clients]
 end
-Z -->|\nnodePort 30080 \n port 80| B
-Z -->|\nnodePort 30081 \n port 80| F
+Z -->|\nnodePort 30080 \n port TCP 80| B
+Z -->|\nnodePort 30081 \n port TCP 80| F
 subgraph Cluster
     subgraph namespace vote
         A[load\n generator]
