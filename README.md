@@ -48,29 +48,6 @@ git clone https://github.com/regisftm/website.git
 
 ---
 
-he following image is an illustration for `deny-app-policy`:
-```mermaid
-flowchart LR
-subgraph Cluster
-    subgraph namespace a
-        A[Pods]
-    end
-    subgraph namespace b
-        B[Pods]
-    end
-    subgraph kube-System
-        C[Pods\nk8s-app == core-dns ]
-    end
-    A[Pods] -->|egress\n UDP 53| C[Pods\nk8s-app == core-dns ]
-    B[Pods] -->|egress\n UDP 53| C[Pods\nk8s-app == core-dns ]
-    A[Pods] x--x|ingress\negress| B[Pods]
-end
-subgraph External resources
-    A[Pods] x--x|ingress\negress| Z[The Internet]
-    B[Pods] x--x|ingress\negress| Z[The Internet]
-    Z[The Internet]
-end
-```
 
 ```mermaid
 flowchart TD
@@ -94,7 +71,6 @@ subgraph Cluster
     D -->|TCP 6379| C
     D -->|TCP 5432| E
     F -->|TCP 5432| E
-end
 end
 ```
 
