@@ -87,9 +87,9 @@ Z -->|\nnodePort 30081 \n port TCP 80| B
 subgraph Cluster
     subgraph namespace vote
         A[load\n generator]
-        B[vote]
+        B[**vote**]
         C[redis]
-        style B fill:#da0,stroke:#009,color:#000,stroke-width:4px
+        style B fill:#da0,stroke:#007,color:#000,stroke-width:5px
     end
     A -->|TCP 80| B
     B -->|TCP 6379| C
