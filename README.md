@@ -50,6 +50,9 @@ git clone https://github.com/regisftm/website.git
 
 
 ```mermaid
+---
+title: Example Vote Application
+---
 flowchart TD
 subgraph The Internet
     Z[clients]
@@ -76,9 +79,31 @@ end
 
 Workloads
 
+load generator
+
+```mermaid
+---
+title: Microservice - Load Generator
+---
+flowchart TB
+subgraph Cluster
+    subgraph namespace vote
+        A[l o a d\n g e n e r a t o r]
+        B[vote]
+        F[result]
+        style A fill:#da0,stroke:#007,color:#000,stroke-width:5px
+    end
+    A -->|TCP 80| B
+    A -->|TCP 80| F
+end
+```
+
 vote
 
 ```mermaid
+---
+title: Microservice - Vote
+---
 flowchart TD
 subgraph The Internet
     Z[clients]
@@ -96,4 +121,82 @@ subgraph Cluster
 end
 ```
 
+Redis
 
+```mermaid
+---
+title: Microservice - Redis
+---
+flowchart TB
+subgraph Cluster
+    subgraph namespace vote
+        B[vote]
+        C[r e d i s]
+        D[worker] 
+        style C fill:#da0,stroke:#007,color:#000,stroke-width:5px
+    end
+    B -->|TCP 6379| C
+    D -->|TCP 6379| C
+end
+```
+
+Worker
+
+```mermaid
+---
+title: Microservice - Worker
+---
+flowchart TB
+subgraph Cluster
+    subgraph namespace vote
+        C[redis]
+        D[w o r k e r] 
+        E[db]
+        style D fill:#da0,stroke:#007,color:#000,stroke-width:5px
+    end
+    D -->|TCP 6379| C
+    D -->|TCP 5432| E
+end
+```
+
+Data Base
+ 
+```mermaid
+---
+title: Microservicos - Data Base
+---
+flowchart TB
+subgraph Cluster
+    subgraph namespace vote
+        D[worker] 
+        E[d b]
+        F[result]
+        style E fill:#da0,stroke:#007,color:#000,stroke-width:5px
+    end
+    D -->|TCP 5432| E
+    F -->|TCP 5432| E
+end
+```
+
+Result
+
+```mermaid
+---
+title: Microservice - Result
+---
+flowchart TD
+subgraph The Internet
+    Z[clients]
+end
+Z -->|\nnodePort 30081 \n port TCP 80| F
+subgraph Cluster
+    subgraph namespace vote
+        A[load\n generator]
+        E[db]
+        F[r e s u l t]
+        style F fill:#da0,stroke:#007,color:#000,stroke-width:5px
+    end
+    A -->|TCP 80| F
+    F -->|TCP 5432| E
+end
+```
