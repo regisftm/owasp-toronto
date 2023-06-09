@@ -89,7 +89,7 @@ subgraph Cluster
         A[load\n generator]
         B[vote]
         C[redis]
-        style B fill:#da0,stroke:#009,color:#fff,stroke-width:4px
+        style B fill:#da0,stroke:#009,color:#000,stroke-width:4px
     end
     A -->|TCP 80| B
     B -->|TCP 6379| C
