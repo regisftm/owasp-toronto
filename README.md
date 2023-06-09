@@ -73,32 +73,21 @@ end
 ```
 
 ```mermaid
-flowchart LR
+flowchart TD
 subgraph Cluster
     subgraph namespace vote
-        A[load\n generator]
-        B[vote]
-        C[redis]
-        D[worker]
-        E[db]
-        F[result]
+        A[load\n generator] -->|TCP 80| B
+        A -->|TCP 80| F
+        B[vote] -->|TCP 6379| C[redis]
+        D[worker] -->|TCP 6379| C[redis]
+        D[worker] -->|TCP 5432| E[db]
+        F[result] -->|TCP 5432| E[db]
+ 
     end
-    subgraph kube-System
-        G[Pods\nk8s-app == core-dns ]
-    end
-```
-
-    A[load\n generator] -->|egress\n UDP 53| G[Pods\nk8s-app == core-dns ]
-    B[vote] -->|egress\n UDP 53| G[Pods\nk8s-app == core-dns ]
-    C[redis] -->|egress\n UDP 53| G[Pods\nk8s-app == core-dns ]
-    D[worker] -->|egress\n UDP 53| G[Pods\nk8s-app == core-dns ]
-    E[db] -->|egress\n UDP 53| G[Pods\nk8s-app == core-dns ]
-    F[result] -->|egress\n UDP 53| G[Pods\nk8s-app == core-dns ]
 end
 subgraph The Internet
-    A[load\n generator] <--|ingress| Z[clients]
-    F[result] <--|ingress| Z[clients]
-    Z[clients]
+    Z[clients] -->|HTTP\n TCP 30080| B
+    Z[clients] -->|HTTP\n TCP 30081| F
 end
 ```
 
