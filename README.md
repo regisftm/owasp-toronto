@@ -74,20 +74,27 @@ end
 
 ```mermaid
 flowchart TD
+subgraph The Internet
+    Z[clients]
+end
+Z -->|TCP 30080 \nnodePort| B
+Z -->|TCP 30081 \nnodePort| F
 subgraph Cluster
     subgraph namespace vote
-        A[load\n generator] -->|TCP 80| B
-        A -->|TCP 80| F
-        B[vote] -->|TCP 6379| C[redis]
-        D[worker] -->|TCP 6379| C[redis]
-        D[worker] -->|TCP 5432| E[db]
-        F[result] -->|TCP 5432| E[db]
- 
+        A[load\n generator]
+        B[vote]
+        C[redis]
+        D[worker] 
+        E[db]
+        F[result]
     end
+    A -->|TCP 80| B
+    A -->|TCP 80| F
+    B -->|TCP 6379| C
+    D -->|TCP 6379| C
+    D -->|TCP 5432| E
+    F -->|TCP 5432| E
 end
-subgraph The Internet
-    Z[clients] -->|HTTP\n TCP 30080| B
-    Z[clients] -->|HTTP\n TCP 30081| F
 end
 ```
 
