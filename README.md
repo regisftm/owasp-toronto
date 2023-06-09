@@ -74,4 +74,26 @@ subgraph Cluster
 end
 ```
 
+Workloads
+
+vote
+
+```mermaid
+flowchart TD
+subgraph The Internet
+    Z[clients]
+end
+Z -->|\nnodePort 30081 \n port TCP 80| B
+subgraph Cluster
+    subgraph namespace vote
+        A[load\n generator]
+        B[vote]
+        C[redis]
+        style B fill:#f9f,stroke:#333,stroke-width:4px
+    end
+    A -->|TCP 80| B
+    B -->|TCP 6379| C
+end
+```
+
 
