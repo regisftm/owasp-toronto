@@ -53,3 +53,5 @@ spec:
     app: prometheus-pod
     role: monitoring
   type: NodePort
+
+  http://prometheus-pod.calico-monitoring.svc:9090

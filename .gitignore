@@ -7,4 +7,6 @@ terraform/.terraform/
 *.tfstate.*
 terraform/owasp-key*.*
 terraform/owasp-key*
+*.svg
+*.mmd
 

@@ -337,11 +337,82 @@ spec:
 EOF
 ```
 
-
-
-default-deny - vote ns
+db - vote ns
 ```yaml
 kubectl apply -f - <<-EOF
+apiVersion: projectcalico.org/v3
+kind: NetworkPolicy
+metadata:
+  name: db
+  namespace: vote
+spec:
+  selector: app == 'db'
+  types:
+  - Ingress
+  - Egress
+  ingress:
+  - action: Allow
+    protocol: TCP
+    source: 
+      selector: app in {'worker', 'result'}
+    destination:
+      ports:
+      - 5432
+EOF
+```
 
+result app
+```yaml
+kubectl apply -f - <<-EOF
+apiVersion: projectcalico.org/v3
+kind: NetworkPolicy
+metadata:
+  name: result
+  namespace: vote
+spec:
+  selector: app == 'result'
+  types:
+  - Ingress
+  - Egress
+  ingress:
+  - action: Allow
+    protocol: TCP
+    source: {}
+    destination:
+      ports:
+      - 80
+  egress:
+  - action: Allow
+    protocol: TCP
+    destination:
+      selector: app == 'db'
+      ports:
+      - 5432
+EOF
+```
+
+
+
+
+loadgenerator - vote ns
+```yaml
+kubectl apply -f - <<-EOF
+apiVersion: projectcalico.org/v3
+kind: NetworkPolicy
+metadata:
+  name: loadgenerator
+  namespace: vote
+spec:
+  selector: app == 'loadgenerator'
+  types:
+  - Ingress
+  - Egress
+  egress:
+  - action: Allow
+    protocol: TCP
+    destination:
+      selector: app in {'vote', 'result'}
+      ports:
+      - 80
 EOF
 ```
