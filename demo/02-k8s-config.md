@@ -6,6 +6,9 @@ After installing kubeadm, kubectl, and kubelet on both nodes and initializing th
 
    ```bash
    ssh -i owasp-key ubuntu@<control_plane_public_ip_address>
+   ```
+
+   ```bash
    grep "kubeadm.*discovery\|discovery.*kubeadm" /var/log/cloud-init-output.log
    ```
    
