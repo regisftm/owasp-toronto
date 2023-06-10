@@ -18,7 +18,7 @@ After installing kubeadm, kubectl, and kubelet on both nodes and initializing th
    kubeadm join <control_plane_private_ip>:6443 --token 9lbxla.pjsptj0m9wra8tyi --discovery-token-ca-cert-hash sha256:bfd99111c1f98dcb4ec225d2ec56fee13d2207057a2811eb67b217be8330c6ed
    </pre>
 
-2. Using the same key, ssh to the worker node (if you have more than one, repeat the step for all of them).
+2. Using the same key, ssh to the worker node (if you have more than one, repeat these steps for all of them).
 
    ```bash
    ssh -i owasp-key ubuntu@<worker_node_public_ip_address>
