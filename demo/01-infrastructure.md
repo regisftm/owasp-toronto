@@ -1,13 +1,12 @@
 # 1 - Infrastructure for the Demo
 
-The environment for the demostration was built on AWS using terraform. If you are not familiar with terraform, its time! : )
-You will need an AWS account and Terraform installed on your computer.
+The environment for the demonstration was built on AWS using Terraform. If you desire to become more familiar with terraform, it's time! : ) You will need an AWS account and Terraform installed on your computer.
 
 1. Start by cloning this repository:
 
 ```bash
 git clone https://github.com/regisftm/owasp-toronto && \
-
+cd owasp-toronto
 ```
 
 2. Change directory to terraform and run the terraform initialization:
