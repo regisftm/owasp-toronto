@@ -13,15 +13,15 @@ kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.26.0
 
 ### Calico Configuration
 
-**Optionally** You can download the custom resources necessary to configure Calico using the command bellow.
+**Optionally** You can download the custom resources necessary to configure Calico using the command below.
 
 ```bash
 curl https://raw.githubusercontent.com/projectcalico/calico/v3.26.0/manifests/custom-resources.yaml -O
 ```
 
-If you wish to customize the Calico install, customize the downloaded `custom-resources.yaml` manifest locally.
+**Optionally** You can download the custom resources necessary to configure Calico using the command below.
 
-The following `yaml` is the custom resources configuration that we will use in this demostration. Copy and apply it to the control-plane node.
+The following `yaml` is the custom resources configuration we will use in this demonstration. Copy and apply it to the control-plane node.
 
 ```yaml
 kubectl apply -f - <<-EOF
@@ -47,23 +47,23 @@ spec: {}
 EOF
 ```
 
-You can watch the tigera-operation to install the Calico CNI componets using k9s -A (yes, I included it in the installation. Pretty handy, eh?), or using the following command.
+You can watch the tigera-operation to install the Calico CNI components using `k9s -A` (yes, I included it in the installation. Pretty handy, eh?) or using the following command.
 
 ```bash
 watch kubectl get tigerastatus
 ```
 
-Wait until the output to look like this:
+Wait until the output looks like this:
 
 <pre>
 Every 2.0s: kubectl get tigerastatus                                           control-plane: Fri Jun  9 19:59:50 2023
 
 NAME        AVAILABLE   PROGRESSING   DEGRADED   SINCE
-apiserver   True        False         False      3m
-calico      True        False         False      3m
+apiserver   True        False         False      102s
+calico      True        False         False      117s
 </pre>
 
-Finally, check the STATUS of the nodes again:
+Finally, recheck the status of the nodes:
 
 ```bash
 kubectl get nodes -o wide
