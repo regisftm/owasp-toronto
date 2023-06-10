@@ -23,6 +23,9 @@ After installing kubeadm, kubectl, and kubelet on both nodes and initializing th
    ```bash
    ssh -i owasp-key ubuntu@<worker_node_public_ip_address>
    ```
+   ```bash
+   sudo su - root
+   ```
 
    Paste the `kubeadm join` command copied from the control-plane node.
 
