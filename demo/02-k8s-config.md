@@ -1,7 +1,5 @@
 # 2 - Kubernetes Cluster Configuration
 
-## Kubernetes Cluster Configuration
-
 The kubeadm, kubectl and kubelet were installed in both clusters and the kubeadm initialized the control-place node.
 You need to join the worker node(s) to the cluster, following these steps:
 

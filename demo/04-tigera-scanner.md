@@ -1,4 +1,4 @@
-# Scan Images for Vulnerabilities with **tigera-scanner**
+# 4 - Scan Images for Vulnerabilities with **tigera-scanner**
 
 From now on we will work connected in the `control-plane` node. For convenience, I am assuming that all commands will be executed as `root`. To escalate your privilege, use:
 

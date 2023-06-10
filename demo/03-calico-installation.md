@@ -1,4 +1,4 @@
-# Install and Configure the Calico CNI
+# 3 - Install and Configure the Calico CNI
 
 Install Calico to provide both networking and network policy for self-managed on-premises deployments.
 
@@ -82,7 +82,7 @@ Congratulations! You have your Kubernetes cluster up and running with Calico CNI
 
 ---
 
-[:arrow_right: 4 - Scan Images for Vulnerabilities with **tigera-scanner**](/demo/03-calico-installation.md) <br>
+[:arrow_right: 4 - Scan Images for Vulnerabilities with **tigera-scanner**](/demo/04-tigera-scanner.md) <br>
 
-[:arrow_left: 1 - Infrastructure for the Demo](/demo/01-infrastructure.md)  
+[:arrow_left: 2 - Kubernetes Cluster Configuration](/demo/02-k8s-config.md)   
 [:leftwards_arrow_with_hook: Back to Main](/README.md)  
