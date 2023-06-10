@@ -10,6 +10,7 @@ I created this repository to store the artifacts used in my OWASP - Toronto Chap
 Companies are searching for new and innovative ways to maintain a competitive edge in a highly competitive and rapidly changing business landscape. One strategy that has demonstrated remarkable effectiveness is **application modernization**. It goes beyond a simple upgrade and involves a comprehensive transformation of business operations. By embracing this approach, companies can expedite innovation, optimize costs, and enhance their **security posture**.
 
 However, embarking on the application modernization journey takes work. It requires a significant investment in people, processes, and technology to achieve the desired business outcomes. Establishing the proper foundation from the beginning is essential to prevent the high cost of re-architecture, which can hinder the achievement of success. 
+
 Developing a standard and scalable security design for their Kubernetes environment is a crucial aspect that establishes the framework for implementing the necessary checks, enforcement, and visibility. This framework enables the realization of strategic business objectives.
 
 In conclusion, application modernization is a strategic initiative that can transform businesses. Developing a standard and scalable security design for the Kubernetes environment is critical to establishing the framework for implementing the necessary checks, enforcement, and visibility to enable strategic business objectives.
