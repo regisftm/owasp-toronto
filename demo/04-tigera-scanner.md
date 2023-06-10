@@ -91,6 +91,7 @@ tigera-scanner scan [OPTIONS] \<image_name\>
 
 <pre><code>```bash
 tigera-scanner scan [OPTIONS] \<image_name\>
+```
 </code></pre>
 
 ```console
