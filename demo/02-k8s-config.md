@@ -43,7 +43,7 @@ You need to join the worker node(s) to the cluster, following these steps:
    <pre>
    NAME            STATUS     ROLES           AGE   VERSION
    control-plane   NotReady   control-plane   28h   v1.26.5
-   worker-01       NotReady   \<none\>          27h   v1.26.5
+   worker-01       NotReady   &lt;none&gt;          27h   v1.26.5
    </pre>
 
    The STATUS is `NotReady` because the CNI is not installed yet. Let's move to the next step to configure and install the Calico CNI.
