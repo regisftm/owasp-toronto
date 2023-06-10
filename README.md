@@ -13,6 +13,6 @@ However, embarking on the journey of application modernization is not an easy ta
 
 In conclusion, application modernization is a strategic initiative that can transform businesses. Developing a standard and scalable security design for the Kubernetes environment is critical to establishing the framework for implementing the necessary checks, enforcement, and visibility to enable strategic business objectives.
 
-Download the presentation [here](/artifacts/presentation-placeholder.pdf)  
-[Steps to reproduce the Demonstration]()
+[Download the presentation](/artifacts/presentation-placeholder.pdf)  
+[Steps to reproduce the Demonstration](/demo/01-infrastructure.md)
 
