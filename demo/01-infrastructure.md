@@ -5,11 +5,10 @@ The environment for the demonstration was built on AWS using Terraform. If you d
 1. Start by cloning this repository:
 
 ```bash
-git clone https://github.com/regisftm/owasp-toronto && \
-cd owasp-toronto
+git clone https://github.com/regisftm/owasp-toronto
 ```
 
-2. Change directory to terraform and run the terraform initialization:
+2. Change the directory to Terraform, and run the Terraform initialization:
 
 ```bash
 cd owasp-toronto/terraform
