@@ -194,11 +194,7 @@ resource "aws_instance" "control_plane" {
     mkdir -p $HOME/.kube
     sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
     sudo chown $(id -u):$(id -g) $HOME/.kube/config
-    
-    # Install Calico CNI
-    # kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.26.0/manifests/tigera-operator.yaml
-    # kubectl apply -f https://raw.githubusercontent.com/projectcalico/calico/v3.26.0/manifests/calico.yaml
-    
+     
     # Remove the taint from controlplane
     kubectl taint nodes --all node-role.kubernetes.io/control-plane-
     
