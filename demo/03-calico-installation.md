@@ -69,12 +69,12 @@ Finally, recheck the status of the nodes:
 kubectl get nodes -o wide
 ```
 
-If everything went well, the output will be similar to the following.
+If everything goes well, the output will be similar to the following.
 
 ```bash
 NAME            STATUS   ROLES           AGE   VERSION   INTERNAL-IP     EXTERNAL-IP   OS-IMAGE             KERNEL-VERSION    CONTAINER-RUNTIME
-control-plane   Ready    control-plane   16m   v1.26.5   172.31.47.191   <none>        Ubuntu 20.04.6 LTS   5.15.0-1037-aws   containerd://1.7.2
-worker-01       Ready    <none>          16m   v1.26.5   172.31.38.151   <none>        Ubuntu 20.04.6 LTS   5.15.0-1037-aws   containerd://1.7.2
+control-plane   Ready    control-plane   26m   v1.26.5   172.31.47.191   <none>        Ubuntu 20.04.6 LTS   5.15.0-1037-aws   containerd://1.7.2
+worker-01       Ready    <none>          18m   v1.26.5   172.31.38.151   <none>        Ubuntu 20.04.6 LTS   5.15.0-1037-aws   containerd://1.7.2
 ```
 
 Congratulations! You have your Kubernetes cluster up and running with Calico CNI. The next step will be to build and scan images for vulnerabilities using the `tigera-scanner`.
