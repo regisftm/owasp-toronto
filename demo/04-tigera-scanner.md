@@ -89,6 +89,11 @@ Syntax:
 tigera-scanner scan [OPTIONS] \<image_name\>
 </pre>
 
+```console
+tigera-scanner scan [OPTIONS] <image_name>
+```
+
+
 Options:
 
 - `--apiurl` - Calico Cloud API URL path. You can get this URL in Manager UI, Image Assurance, Scan settings.
