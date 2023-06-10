@@ -1,4 +1,4 @@
-# Infrastructure for the Demo
+# 1 - Infrastructure for the Demo
 
 The environment for the demostration was built on AWS using terraform. If you are not familiar with terraform, its time! : )
 You will need an AWS account and Terraform installed on your computer.
