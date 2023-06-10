@@ -28,7 +28,7 @@ terraform apply --auto-approve
 ```
 5. After a few minutes, you will see the output containing the created public IPs for the EC2 instances. 
 
-```special
+```console
 Apply complete! Resources: 12 added, 0 changed, 0 destroyed.
 
 Outputs:
