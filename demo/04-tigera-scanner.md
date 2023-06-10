@@ -89,6 +89,10 @@ Syntax:
 tigera-scanner scan [OPTIONS] \<image_name\>
 </pre>
 
+<pre><code>```bash
+tigera-scanner scan [OPTIONS] \<image_name\>
+</code></pre>
+
 ```console
 tigera-scanner scan [OPTIONS] <image_name>
 ```
