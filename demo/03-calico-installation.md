@@ -19,10 +19,9 @@ kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.26.0
 curl https://raw.githubusercontent.com/projectcalico/calico/v3.26.0/manifests/custom-resources.yaml -O
 ```
 
-If you wish to customize the Calico install, customize the downloaded custom-resources.yaml manifest locally.
+If you wish to customize the Calico install, customize the downloaded `custom-resources.yaml` manifest locally.
 
 The following `yaml` is the custom resources configuration that we will use in this demostration. Copy and apply it to the control-plane node.
-
 
 ```yaml
 kubectl apply -f - <<-EOF
