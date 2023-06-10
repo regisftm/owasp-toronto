@@ -56,6 +56,8 @@ Lets start by cloning a repository that contains two versions of a website and c
    CMD ["nginx", "-g", "daemon off;"]
    </pre>
 
+   Build the images with the following commands:
+
    ```bash
    docker build -t website:v1.0.0 v1.0.0/.
    docker build -t website:v1.1.0 v1.1.0/.
