@@ -65,7 +65,7 @@ After installing kubeadm, kubectl, and kubelet on both nodes and initializing th
    worker-01       NotReady   &lt;none&gt;          2m36s   v1.26.5
    </pre>
 
-   The STATUS is `NotReady` because the CNI is not installed yet. Let's move to the next step to configure and install the Calico CNI.
+   The current status is "**NotReady**" due to the absence of the CNI (Container Networking Interface) installation. Let's proceed to the next step, which involves configuring and installing the Calico CNI to resolve this issue.
 
 ---
 
