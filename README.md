@@ -3,7 +3,7 @@
 # OWASP x Project Calico x Okta <br> Container and Kubernetes Security Policy Design
 Date: 2023-06-15 @ 18:30 (America/Toronto)
 
-Welcome
+## Welcome
 
 I create this repo to store the artifacts used in my presentation at the OWASP - Toronto Chapter. Here you will find the presentation slides and the step by step instructions to reproduce the demo I presented. 
 
