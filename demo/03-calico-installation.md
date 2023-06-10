@@ -5,7 +5,7 @@ Install Calico to provide both networking and network policy for self-managed on
 
 ### Calico Installation
 
-Calico is installed by an operator which manages the installation, upgrade, and general lifecycle of a Calico cluster. The operator is installed directly on the cluster as a Deployment, and is configured through one or more custom Kubernetes API resources.
+The operator installs directly on the cluster as a Deployment and requires configuration through one or more custom Kubernetes API resources to manage the installation, upgrade, and general lifecycle of a Calico cluster.
 
 ```bash
 kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.26.0/manifests/tigera-operator.yaml
@@ -13,7 +13,7 @@ kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.26.0
 
 ### Calico Configuration
 
-You can download the custom resources necessary to configure Calico using the command bellow.
+**Optionally** You can download the custom resources necessary to configure Calico using the command bellow.
 
 ```bash
 curl https://raw.githubusercontent.com/projectcalico/calico/v3.26.0/manifests/custom-resources.yaml -O
