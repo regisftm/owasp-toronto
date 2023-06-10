@@ -15,18 +15,18 @@ cd owasp-toronto/terraform
 terraform init
 ```
 
-3. Edit the `variables.tf` file and change accordingly. The default value will generate 1 EC2 instance type t3.small for control-plane and 1 EC2 instance type t3.medium for the worker node. The AWS region selected is the `ca-central-1`. Feel free to change the variable values to whatever you want to have in your environment. I can't promisse that it will work well with limited resources though.
+3. Edit the `variables.tf` file and change accordingly. The default value will generate 1 EC2 instance type t3.small for the control-plane and 1 EC2 instance type t3.medium for the worker node. The AWS region selected is `ca-central-1`. Feel free to change the variable values to whatever you want in your environment. I can't promise that it will work well if you use smaller instance types.
 
 ```bash
 vi variables.tf
 ```
 
-4. Apply the terraform code. This will build the EC2 instances, install Kubernetes and other software used during the demo.
+4. Apply the Terraform code. This code will build the EC2 instances and install Kubernetes and other software used in this demonstration.
 
 ```bash
 terraform apply --auto-approve
 ```
-5. After a few minutes, you will see the output containing the public ips for the EC2s created. 
+5. After a few minutes, you will see the output containing the created public IPs for the EC2 instances. 
 
 <pre>
 
