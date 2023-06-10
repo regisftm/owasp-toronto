@@ -146,3 +146,154 @@ You can configure Felix, Typha, and/or kube-controllers to provide metrics to Pr
    ```
 
 
+## Install Prometheus
+
+1. Create prometheus config file.
+   
+   We can configure Prometheus using a ConfigMap to persistently store the desired settings.
+
+   ```yaml
+   kubectl apply -f - <<EOF
+   apiVersion: v1
+   kind: ConfigMap
+   metadata:
+     name: prometheus-config
+     namespace: calico-monitoring
+   data:
+     prometheus.yml: |-
+       global:
+         scrape_interval:   15s
+         external_labels:
+           monitor: 'tutorial-monitor'
+       scrape_configs:
+       - job_name: 'prometheus'
+         scrape_interval: 5s
+         static_configs:
+         - targets: ['localhost:9090']
+       - job_name: 'felix_metrics'
+         scrape_interval: 5s
+         scheme: http
+         kubernetes_sd_configs:
+         - role: endpoints
+         relabel_configs:
+         - source_labels: [__meta_kubernetes_service_name]
+           regex: felix-metrics-svc
+           replacement: $1
+           action: keep
+       - job_name: 'typha_metrics'
+         scrape_interval: 5s
+         scheme: http
+         kubernetes_sd_configs:
+         - role: endpoints
+         relabel_configs:
+         - source_labels: [__meta_kubernetes_service_name]
+           regex: typha-metrics-svc
+           replacement: $1
+           action: keep
+         - source_labels: [__meta_kubernetes_pod_container_port_name]
+           regex: calico-typha
+           action: drop
+       - job_name: 'kube_controllers_metrics'
+         scrape_interval: 5s
+         scheme: http
+         kubernetes_sd_configs:
+         - role: endpoints
+         relabel_configs:
+         - source_labels: [__meta_kubernetes_service_name]
+           regex: calico-kube-controllers-metrics
+           replacement: $1
+           action: keep
+   EOF
+   ```
+
+2. Create Prometheus pod
+
+   Now that you have a serviceaccount with permissions to gather metrics and have a valid config file for your Prometheus, it's time to create the Prometheus pod.
+
+   ```yaml
+   kubectl apply -f - <<EOF
+   apiVersion: v1
+   kind: Pod
+   metadata:
+     name: prometheus-pod
+     namespace: calico-monitoring
+     labels:
+       app: prometheus-pod
+       role: monitoring
+   spec:
+     serviceAccountName: calico-prometheus-user
+     containers:
+     - name: prometheus-pod
+       image: prom/prometheus
+       resources:
+         limits:
+           memory: "128Mi"
+           cpu: "500m"
+       volumeMounts:
+       - name: config-volume
+         mountPath: /etc/prometheus/prometheus.yml
+         subPath: prometheus.yml
+       ports:
+       - containerPort: 9090
+     volumes:
+     - name: config-volume
+       configMap:
+         name: prometheus-config
+   EOF
+   ```
+   
+   Check your cluster pods to assure pod creation was successful and prometheus pod is Running.
+   
+   ```bash
+   kubectl get pods prometheus-pod -n calico-monitoring
+   ```
+
+   It should return something like the following.
+   
+   <pre>
+   NAME             READY   STATUS    RESTARTS   AGE
+   prometheus-pod   1/1     Running   0          16s
+   </pre>
+
+## View metrics
+
+Create a nodeport service to expose your prometheus dashboard. 
+
+```yaml
+kubectl apply -f - <<EOF
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: prometheus-dashboard-svc-external
+    role: monitoring
+  name: prometheus
+  namespace: calico-monitoring
+spec:
+  ports:
+  - nodePort: 30090
+    port: 9090
+    protocol: TCP
+    targetPort: 9090
+  selector:
+    app: prometheus-pod
+    role: monitoring
+  type: NodePort
+EOF
+```
+
+Browse to http://<control-plane_public_ip>:9090 and you should be able to see the Prometheus dashboard. Type `felix_active_local_endpoints` in the Expression input textbox then hit the execute button. Console table should be populated with all your nodes and quantity of endpoints in each of them.
+
+> **NOTE** : A list of Felix metrics can be [found at this link](https://docs.tigera.io/calico/latest/reference/felix/prometheus). Similar lists can be found for kube-controllers and Typha.
+
+Push the `Add Graph` button, You should be able to see the metric plotted on a Graph.
+
+Now you can install and configure Graphana to vizualise the Calico statistics.
+
+---
+
+[:arrow_right: 7 - Visualizing Metrics via Grafana](/demo/07-graphana-installation.md) <br>
+
+[:arrow_left: 5 - Protect Your Application with **Security Policies**](/demo/05-security-policy.md)  
+[:leftwards_arrow_with_hook: Back to Main](/README.md)  
+

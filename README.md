@@ -5,7 +5,7 @@ Date: 2023-06-15 @ 18:30 (America/Toronto)
 
 Welcome
 
-I create this repo to store the artifacts used in my presentation at the OWASP Toronto Chapter. Here you will find the presentation slides and the step by step instructions to reproduce the demo I presented. 
+I create this repo to store the artifacts used in my presentation at the OWASP - Toronto Chapter. Here you will find the presentation slides and the step by step instructions to reproduce the demo I presented. 
 
 Companies are constantly seeking new and innovative ways to stay ahead in a highly competitive and rapidly changing business landscape. One strategy that has proven to be highly effective is application modernization. This is not just a mere upgrade; it is a complete transformation of how businesses operate. By embracing this approach, companies can accelerate innovation, optimize costs, and improve their overall security posture. 
 
@@ -16,3 +16,26 @@ In conclusion, application modernization is a strategic initiative that can tran
 - [Download the presentation](/artifacts/presentation-placeholder.pdf)  
 - [Steps to reproduce the Demonstration](/demo/01-infrastructure.md)
 
+If you have any questions, please contact me: 
+- [LinkedIn](https://www.linkedin.com/in/regismartins/)
+
+- <img src="https://github.com/FortAwesome/Font-Awesome/blob/6.x/svgs/brands/linkedin.svg" width="30" height="30"> [LinkedIn](https://www.linkedin.com/in/regismartins/)
+
+
+### Useful links
+
+- [Project Calico](https://www.tigera.io/project-calico/)
+- [Calico Academy - Get Calico Certified!](https://academy.tigera.io/)
+- [O’REILLY EBOOK: Kubernetes security and observability](https://www.tigera.io/lp/kubernetes-security-and-observability-ebook)
+- [Calico Users - Slack](https://slack.projectcalico.org/)
+
+**Follow us on social media**
+
+- [LinkedIn](https://www.linkedin.com/company/tigera/)
+- [Twitter](https://twitter.com/tigeraio)
+- [YouTube](https://www.youtube.com/channel/UC8uN3yhpeBeerGNwDiQbcgw/)
+- [Slack](https://calicousers.slack.com/)
+- [Github](https://github.com/tigera-solutions/)
+- [Discuss](https://discuss.projectcalico.tigera.io/)
+
+> **Note**: The demo provides examples and sample code as instructional content for you to consume. These examples will help you understand how to configure Calico and build a functional solution. Please note that these examples are not suitable for use in production environments.
