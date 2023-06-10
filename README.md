@@ -39,4 +39,4 @@ If you have any questions, please contact me:
 - [Github](https://github.com/tigera-solutions/)
 - [Discuss](https://discuss.projectcalico.tigera.io/)
 
-> **Note**: The demo provides examples and sample code as instructional content for you to consume. These examples will help you understand how to configure Calico and build a functional solution. Please note that these examples are not suitable for use in production environments.
+> **Note**: The demostration provides examples and sample code as instructional content for you to consume. These examples will help you understand how to configure Calico and build a functional solution. Please note that these examples are not suitable for use in production environments.
