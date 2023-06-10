@@ -50,6 +50,8 @@ After installing kubeadm, kubectl, and kubelet on both nodes and initializing th
    root@worker-01:~#
    </pre>
 
+   After joining the worker node to the cluster, you can close the terminal connected to the worker node.
+
 3. From the terminal connected to the control-plane, verify if the node successfully joined the cluster by running the following command as `root`:
 
    ```bash
