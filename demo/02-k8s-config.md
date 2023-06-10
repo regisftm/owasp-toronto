@@ -32,10 +32,25 @@ After installing kubeadm, kubectl, and kubelet on both nodes and initializing th
    The output will look like the following:
 
    <pre>
+   root@worker-01:~# kubeadm join 172.31.44.20:6443 --token 92ap7u.vwmkiesc0cjcdphp --discovery-token-ca-cert-hash sha256:d60463cc14666f454579eca7c26b61569b90da4d75aa912a293529f49194d50a
+   [preflight] Running pre-flight checks
+   [preflight] Reading configuration from the cluster...
+   [preflight] FYI: You can look at this config file with 'kubectl -n kube-system get cm kubeadm-config -o yaml'
+   [kubelet-start] Writing kubelet configuration to file "/var/lib/kubelet/config.yaml"
+   [kubelet-start] Writing kubelet environment file with flags to file "/var/lib/kubelet/kubeadm-flags.env"
+   [kubelet-start] Starting the kubelet
+   [kubelet-start] Waiting for the kubelet to perform the TLS Bootstrap...
    
+   This node has joined the cluster:
+   * Certificate signing request was sent to apiserver and a response was received.
+   * The Kubelet was informed of the new secure connection details.
+   
+   Run 'kubectl get nodes' on the control-plane to see this node join the cluster.
+   
+   root@worker-01:~#
    </pre>
 
-   From the terminal connected to the control-plane, verify if the node successfuly joined the cluster by running the following command, as `root`:
+3. From the terminal connected to the control-plane, verify if the node successfuly joined the cluster by running the following command, as `root`:
 
    ```bash
    kubectl get nodes
