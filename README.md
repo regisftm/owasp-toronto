@@ -17,7 +17,6 @@ In conclusion, application modernization is a strategic initiative that can tran
 - [Steps to reproduce the Demonstration](/demo/01-infrastructure.md)
 
 If you have any questions, please contact me: 
-- [LinkedIn](https://www.linkedin.com/in/regismartins/)
 
 - <img src="https://github.com/FortAwesome/Font-Awesome/blob/6.x/svgs/brands/linkedin.svg" width="15" height="15"> [LinkedIn](https://www.linkedin.com/in/regismartins/)
 
