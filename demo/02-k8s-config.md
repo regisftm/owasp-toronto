@@ -60,9 +60,9 @@ After installing kubeadm, kubectl, and kubelet on both nodes and initializing th
    The output should be:
 
    <pre>
-   NAME            STATUS     ROLES           AGE   VERSION
-   control-plane   NotReady   control-plane   28h   v1.26.5
-   worker-01       NotReady   &lt;none&gt;          27h   v1.26.5
+   NAME            STATUS     ROLES           AGE     VERSION
+   control-plane   NotReady   control-plane   22m     v1.26.5
+   worker-01       NotReady   &lt;none&gt;          2m36s   v1.26.5
    </pre>
 
    The STATUS is `NotReady` because the CNI is not installed yet. Let's move to the next step to configure and install the Calico CNI.
