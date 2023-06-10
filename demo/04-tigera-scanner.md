@@ -85,19 +85,9 @@ You can scan images manually or via CI/CD pipeline for vulnerabilities using the
 
 Syntax:
 
-<pre>
-tigera-scanner scan [OPTIONS] \<image_name\>
-</pre>
-
-<pre><code>```bash
-tigera-scanner scan [OPTIONS] \<image_name\>
-```
-</code></pre>
-
 ```console
 tigera-scanner scan [OPTIONS] <image_name>
 ```
-
 
 Options:
 
@@ -127,7 +117,7 @@ Next, let's learn how to implement security policies for your applications.
 
 ---
 
-[:arrow_right: 5 - Security Policies](/demo/05-security-policy.yaml) <br>
+[:arrow_right: 5 - Protect Your Application with **Security Policies**](/demo/05-security-policy.md) <br>
 
 [:arrow_left: 3 - Install and Configure the Calico CNI](/demo/03-calico-installation.md)  
 [:leftwards_arrow_with_hook: Back to Main](/README.md)  
