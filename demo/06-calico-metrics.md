@@ -1,4 +1,4 @@
-# Calico Component Metrics
+# 6 - Calico Component Metrics
 
 Use Prometheus configured for Calico components to get valuable metrics about the health of Calico on a Graphana dashboard.
 
