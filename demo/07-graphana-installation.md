@@ -134,7 +134,7 @@ EOF
    EOF
    ```
 
-   Access Grafana web-ui at http://<control-plane_public_ip>:30000.
+   Access Grafana web-ui at `http://<control-plane_public_ip>:30000`.
 
    > **Note** : Both `username` and `password` are `admin`.
 

@@ -265,9 +265,9 @@ apiVersion: v1
 kind: Service
 metadata:
   labels:
-    app: prometheus-dashboard-svc-external
+    app: prometheus-dashboard-svc
     role: monitoring
-  name: prometheus
+  name: prometheus-dashboard-svc
   namespace: calico-monitoring
 spec:
   ports:
