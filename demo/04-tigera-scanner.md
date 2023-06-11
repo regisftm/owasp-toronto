@@ -1,6 +1,6 @@
 # 4 - Scan Images for Vulnerabilities with **tigera-scanner**
 
-From this point forward, we will work directly on the control-plane node. Assume that all commands execute as the `root` user. To elevate your privileges, please use the following command:
+From this point forward, we will work directly on the control-plane node. Assume that all commands execute as the `root` user. If you didn't yet, elevate your privileges using the following command:
 
 ```bash 
 sudo su - root
