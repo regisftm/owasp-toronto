@@ -63,7 +63,7 @@ After installing kubeadm, kubectl, and kubelet on both nodes and initializing th
 
    <pre>
    NAME            STATUS     ROLES           AGE     VERSION
-   control-plane   NotReady   control-plane   22m     v1.26.5
+   control-plane   NotReady   control-plane   14m     v1.26.5
    worker-01       NotReady   &lt;none&gt;          2m36s   v1.26.5
    </pre>
 
