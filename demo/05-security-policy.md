@@ -163,7 +163,7 @@ http://<contro_plane_public_ip>:30080
 http://<contro_plane_public_ip>:30081
 ```
 
-> **Tip** : If you don't remember the control-plane public IP get is from the metadata using the followinf command:
+> **Tip** : If you don't remember the control-plane public IP, get it from the metadata using the following command:
 > ```bash
 > curl http://169.254.169.254/latest/meta-data/public-ipv4
 > ```
