@@ -13,7 +13,7 @@ kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.26.0
 
 ### Calico Configuration
 
-**Optionally** You can download the custom resources necessary to configure Calico using the command below.
+**Optionally** you can download the custom resources necessary to configure Calico using the command below.
 
 ```bash
 curl https://raw.githubusercontent.com/projectcalico/calico/v3.26.0/manifests/custom-resources.yaml -O
