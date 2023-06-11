@@ -81,7 +81,7 @@ You can configure Felix, Typha, and/or kube-controllers to provide metrics to Pr
 
    <pre>
    NAME                              TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)    AGE
-   calico-kube-controllers-metrics   ClusterIP   None             &lt;none&gt;        9095/TCP   43h
+   calico-kube-controllers-metrics   ClusterIP   None             &lt;none&gt;        9094/TCP   43h
    </pre>
 
 ---
