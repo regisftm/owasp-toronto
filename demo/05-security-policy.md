@@ -192,7 +192,7 @@ EOF
 
 Note that, despite the applied policy being a `GlobalNetworkPolicy`, we are restricting its action to the `vote` namespace using the `selector: projectcalico.org/namespace == 'vote'`. In this way, the traffic from and to any pod running inside the namespace `vote` will be denied.
 
-**Reload the vote and result applications on your browser. You should see a `ERR_CONNECTION_TIMED_OUT` message.**
+**Reload the `vote` and `result` applications on your browser. You should see a `ERR_CONNECTION_TIMED_OUT` message.**
 
 ### Allowing network connections
 
@@ -281,7 +281,7 @@ spec:
 EOF
 ```
 
-Apply the policy and try to connect to the vote application again from your browser. What changed?
+Apply the policy and try to connect to the vote application again from your browser. What changed? Can you vote?
 
 #### result microservice
 
