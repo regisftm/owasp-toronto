@@ -163,6 +163,11 @@ http://<contro_plane_public_ip>:30080
 http://<contro_plane_public_ip>:30081
 ```
 
+> **Tip** : If you don't remember the control-plane public IP get is from the metadata using the followinf command:
+> ```bash
+> curl http://169.254.169.254/latest/meta-data/public-ipv4
+> ```
+
 ## The Zero Trust approach
 
 By default, all traffic is allowed between the pods in a cluster. A global default deny policy ensures that unwanted traffic (ingress and egress) is denied by default. Pods without policy (or incorrect policy) are not allowed traffic until the appropriate network policy is defined. A global deny policy helps mitigate lateral malicious attacks.
