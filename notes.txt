@@ -55,3 +55,24 @@ spec:
   type: NodePort
 
   http://prometheus-pod.calico-monitoring.svc:9090
+
+  ## Preparing Prometheus
+
+Create a service to make your Prometheus visible to Grafana.
+
+```bash
+kubectl apply -f - <<EOF
+apiVersion: v1
+kind: Service
+metadata:
+  name: prometheus-dashboard-svc
+  namespace: calico-monitoring
+spec:
+  selector:
+      app:  prometheus-pod
+      role: monitoring
+  ports:
+  - port: 9090
+    targetPort: 9090
+EOF
+```
