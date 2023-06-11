@@ -111,7 +111,7 @@ Options:
 
    Observe the differences between both results. Older images have more vulnerabilities than new images.  
    
-   > **NOTE** : **Keep your images updated!**
+   > **NOTE**: **Keep your images updated!**
    
 Next, let's learn how to implement security policies for your applications.
 
