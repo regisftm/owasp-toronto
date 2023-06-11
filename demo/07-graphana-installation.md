@@ -1,10 +1,10 @@
-# Visualizing Metrics via Grafana
+# 7 - Visualizing Metrics via Grafana
 
-Use Grafana dashboard to view Calico component metrics.
+Use the Grafana dashboard to view Calico component metrics.
 
 ## Preparing Prometheus
 
-Here you will create a service to make your prometheus visible to Grafana.
+Create a service to make your Prometheus visible to Grafana.
 
 ```bash
 kubectl apply -f - <<EOF
@@ -27,9 +27,9 @@ EOF
 
 1. Provisioning datasource
    
-   Grafana datasources are storage backends for your time series data. Each data source has a specific Query Editor that is customized for the features and capabilities that the particular data source exposes.
+   Grafana data sources are storage backends for your time series data. Each data source has a specific Query Editor that is customized for the features and capabilities that the particular data source exposes.
 
-   Setup a datasource and point it to the Prometheus service in your cluster.
+   Set up a data source and point it to the Prometheus service in your cluster.
 
    ```yaml
    kubectl apply -f - <<EOF
@@ -59,7 +59,7 @@ EOF
 
 2. Provisioning Calico dashboards
  
-   Create a configmap with Felix and Typha dashboards.
+   Create a `configmap` with Felix and Typha dashboards.
 
    ```bash
    kubectl apply -f https://raw.githubusercontent.com/projectcalico/calico/v3.26.0/manifests/grafana-dashboards.yaml
@@ -110,7 +110,7 @@ EOF
 
 4. Accessing Grafana Dashboard
 
-   To view your Grafana dashboards create the following nodeport service.
+   To view your Grafana dashboards, create the following `nodeport` service.
 
    ```yaml
    kubectl apply -f - <<EOF
@@ -136,13 +136,13 @@ EOF
 
    Access Grafana web-ui at http://<control-plane_public_ip>:30000.
 
-   > **NOTE** : Both `username` and `password` are `admin`.
+   > **Note** : Both `username` and `password` are `admin`.
 
-   After login you will be prompted to change the default password, you can either change it here (Recommended) and click Save or click Skip and do it later from settings.
+   After login, you will be prompted to change the default password. You can change it (recommended), click `Save` or `Skip`, and do it later from settings.
 
 ---
 
-# Congratulation you have arrived at the end of the demo! I hope you have enjoyed!
+# Congratulation, you have arrived at the end of the demo! I hope you have enjoyed it!
 
 ---
 

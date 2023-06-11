@@ -31,7 +31,7 @@ EOF
 {__name__=~".+"}
 go_gc_duration_seconds{instance="172.31.38.151:9100", job="prometheus-node-exporter", quantile="0.25"}
 rate(go_gc_duration_seconds{instance="172.31.38.151:9100", job="prometheus-node-exporter", quantile="0.25"}[5m])
-
+rate(prometheus_http_response_size_bytes_sum{handler="/api/v1/query", instance="localhost:9090", job="prometheus"}[5m])
 rate(go_memstats_stack_sys_bytes{instance="192.168.171.4:9094", job="kube_controllers_metrics"}[5m])
 
 
