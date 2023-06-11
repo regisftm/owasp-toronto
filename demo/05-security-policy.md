@@ -1,10 +1,10 @@
 # 5 - Protect Your Application with **Security Policies**
 
 ## Security Policy design
-===
-Kubernetes provides a framework for defining and applying policies to your cluster, but it is up to the administrator to create and enforce those policies. However, on its own, Kubernetes doesn't enforce these policies, and it delegates this to the container networking interface (CNI) plugin. 
 
-One of the key default behaviors in Kubernetes is that all pods are allowed to communicate with each other by default. This means that if a pod is running a vulnerable application, other pods in the same cluster may also be at risk. To mitigate this risk, it is recommended to create network policies that restrict the traffic between pods based on their labels. However, this behavior changes to a default deny the moment that you add a policy to your cluster. When a network policy is added to a Kubernetes cluster, it overrides the default allow-all behavior and enforces the rules (with the help of your CNI) defined in the policy. This means that if a pod tries to communicate with another pod that is not explicitly allowed by the policy, the communication will be denied.
+Kubernetes provides a framework for defining and applying policies to your cluster; however, it is up to the administrator to create and enforce those policies. Yet, on its own, Kubernetes doesn't enforce these policies. It delegates this to the container networking interface (CNI) plugin. 
+
+One of the default behaviours in Kubernetes is that all pods are allowed to communicate with each other. It means that if a pod runs a vulnerable application, other pods in the same cluster may also be at risk. To mitigate this risk, it is advisable to create network policies that restrict traffic between pods based on their labels. However, when you create a network policy, it changes the default behaviour to deny all traffic except what is explicitly allowed by the policy (with the assistance of your CNI). This implies that if a pod attempts to communicate with another pod not explicitly permitted by the policy, the communication will be denied.
 
 ### Policy structure
 
@@ -24,7 +24,7 @@ kind: GlobalNetworkPolicy
 </pre>
 
 ### Rules
-Each policy can contain one or more rule, these rules can affect traffics that are incoming `ingress` or outgoing `egress`.
+Each policy can contain one or more rule; these rules can affect traffics that are incoming `ingress` or outgoing `egress`.
 
 An ingress rule example:
 
@@ -52,7 +52,7 @@ spec:
 
 ## Policy precedence
 
-In Calico, policy priority is determined based on the order assigned to each policy, with lower order policies taking precedence over higher order policies. This means that if you have two policies in a Calico-enabled Kubernetes cluster, one that denies traffic with a order of 10 and the other that allows traffic with a order of 20, the traffic will be denied since the lower order policy takes precedence over the higher order policy.
+In Calico, policy priority is determined based on the order assigned to each policy, with lower-order policies taking precedence over higher-order policies. This means that if you have two policies in a Calico-enabled Kubernetes cluster, one that denies traffic with an order of 10 and the other that allows traffic with an order of 20, the traffic will be denied since the lower order policy takes precedence over the higher order policy.
 
 The following illustration is the behavior that will take place in such a scenario:
 
@@ -71,14 +71,14 @@ spec:
 #### Kubernetes policy precedence
 When you create a Kubernetes NetworkPolicy (KNP) and a Calico policy in the same cluster, Calico will automatically assign the KNP a default order number of `1000` since Kubernetes policy resources do not provide an explicit way to set the order of policy evaluation and enforcement.
 
-If you want the KNP to be evaluated and enforced before any Calico policies, you will need to set the order number of your Calico policy to a value higher than `1000`. For example, you can set the order number of your Calico policy to `1001` or higher to ensure that it is evaluated and enforced after the KNP.
+Suppose you want the KNP to be evaluated and enforced before any Calico policies. In that case, you will need to set the order number of your Calico policy to a value higher than `1000`. For example, you can set the order number of your Calico policy to `1001` or higher to ensure that it is evaluated and enforced after the KNP.
 
-> **Note:** It is important to carefully manage policy order in Calico to ensure that your policies are evaluated and enforced correctly in your Kubernetes cluster.
+> **Note:** It is essential to carefully manage policy order in Calico to ensure your policies are evaluated and enforced correctly in your Kubernetes cluster.
 
 
 #### Calico un-ordered policies
-You might now be wondering what happens when a Calico policy is created with an undefined order number?
-In such a case Calico policies will automatically have an order number equal to infinity, and if you have two or more of these policies the tie breaker rule will apply to determine their priority.
+You might now wonder what happens when a Calico policy is created with an undefined order number.
+In such a case, Calico policies will automatically have an order number equal to infinity, and if you have two or more of these policies, the tie breaker rule will apply to determine their priority.
 
 #### The tie breaker rule
 In a scenario where you have multiple Calico policies without an order number or with the same order number, Calico policy engine will use their name as a tiebreaker to determine the order of policy evaluation and enforcement.
@@ -86,11 +86,11 @@ In a scenario where you have multiple Calico policies without an order number or
 For example, if you have two unordered policies named `alpha` and `zulu`, the policy engine will first evaluate and enforce the policy named `alpha` and then the policy named `zulu`, or if you have two policies named `aac` and `aab` policy `aab` will be evaluated first. Keep in mind that 
 
 #### The Log exception
-Calico allows you to create iptable log rules to log packets that match certain criteria. These log rules can be assigned an order number like other policies, but it is important to note that the policy that comes after a log rule will be the final decider and no other policies will be evaluated. Therefore, you should ensure that the policy after a log rule is configured correctly to avoid unintended consequences. 
+Calico allows you to create iptable log rules to log packets that match specific criteria. These log rules can be assigned an order number like other policies, but it is important to note that the policy that comes after a log rule will be the final decider and no other policies will be evaluated. Therefore, you should ensure the policy after a log rule is configured correctly to avoid unintended consequences. 
 
 
 ## Preventing a lockout
-As a best practice whenever you are trying to experiment with policies in any environment it is best to implement a `safe-mode` strategy by first explicitly permitting the traffic and then writing your deny rules. This helps to eliminate the chance of accidentally locking yourself out of a cluster if a misconfigured policy is applied.
+As a best practice, whenever you are trying to experiment with policies in any environment, it is best to implement a `safe-mode` strategy by first explicitly permitting the traffic and then writing your deny rules. This helps to eliminate the chance of accidentally locking yourself out of a cluster if a misconfigured policy is applied.
 
 Use the following command to explicitly allow every traffic in and out of your cluster:
 
@@ -109,12 +109,12 @@ spec:
 EOF
 ```
 
-It is worth mentioning, that Calico also implements a default fail-safe, which is a policy with a list of essential ports and services that are required for your cluster to function. Click [here](https://docs.tigera.io/calico/latest/network-policy/hosts/protect-hosts#failsafe-rules), if you like to know more about Calico's fail safe.
+It is worth mentioning that Calico also implements a default fail-safe, a policy with a list of essential ports and services required for your cluster to function. Click [here](https://docs.tigera.io/calico/latest/network-policy/hosts/protect-hosts#failsafe-rules), if you like to know more about Calico's fail-safe.
 
 
 # Protect an example application
 
- As a practical example, lets install and protect the [**Example Voting Application**](https://github.com/dockersamples/example-voting-app). Below there is a diagram explaining the port used for communication between the microservices.
+As a practical example, let's install and protect the [**Example Voting Application**](https://github.com/dockersamples/example-voting-app). Below is a diagram explaining the port used for communication between the microservices.
 
 ```mermaid
 ---
@@ -144,20 +144,20 @@ subgraph Cluster
 end
 ```
 
-Install the application by returning to the `owasp-toronto` directory and applying the following commnad:
+Install the application by returning to the `owasp-toronto` directory and applying the following command:
 
 ```bash
 kubectl apply -f vote-app
 ```
 
-The services `vote` and `result` will expose the application to the internet. To access them, use the public IP address of the control-plane instance. The application will be exposed on the following ports: `30080` for `vote` service and `30081` for the `result` service. Use HTTP protocol, as the applications are not secure.
+The services `vote` and `result` will expose the application to the internet. To access them, use the public IP address of the control-plane instance. The application will be exposed on the ports: `30080` for `vote` service and `30081` for the `result` service. Use HTTP protocol, as the applications are not secure.
 
-vote microservice
+`vote microservice`
 ```html
 http://<contro_plane_public_ip>:30080  
 ```
 
-result microservice
+`result microservice`
 ```html
 http://<contro_plane_public_ip>:30081
 ```
@@ -166,9 +166,9 @@ http://<contro_plane_public_ip>:30081
 
 By default, all traffic is allowed between the pods in a cluster. A global default deny policy ensures that unwanted traffic (ingress and egress) is denied by default. Pods without policy (or incorrect policy) are not allowed traffic until the appropriate network policy is defined. A global deny policy helps mitigate lateral malicious attacks.
 
-We recommend creating a global default deny policy after you complete writing policies for the traffic you want to allow. For this exercise, as we will target only the vote namespace, let's apply the default-deny first and break the application. After, let's create all the needed policies, applying the principal of least privile, granting access only to what is needed to have our application working again.
+We recommend creating a global default deny policy after you complete writing policies for the traffic you want to allow. For this exercise, as we will target only the vote namespace, let's apply the default-deny first and break the application. After, let's create all the needed policies, using the principle of least privilege, granting access only to what is required to have our application working again.
 
-default-deny - vote ns
+`default-deny - vote ns`
 ```yaml
 kubectl apply -f - <<-EOF
 apiVersion: projectcalico.org/v3
@@ -184,15 +184,15 @@ spec:
 EOF
 ```
 
-Note that, in spite of the applied policy is a `GlobalNetworkPolicy`, we are restricting its action to the `vote` namespace using the `selector: projectcalico.org/namespace == 'vote'`. In this way, the traffic from and to any pod running inside the namespace `vote` will be denied.
+Note that, despite the applied policy being a `GlobalNetworkPolicy`, we are restricting its action to the `vote` namespace using the `selector: projectcalico.org/namespace == 'vote'`. In this way, the traffic from and to any pod running inside the namespace `vote` will be denied.
 
 ### Allowing network connections
 
-Access to DNS is essential for pods in a Kubernetes cluster because it enables service discovery, load balancing, and communication between pods using domain names. DNS allows pods to resolve domain names to IP addresses, facilitating seamless connectivity within the cluster, as well as connectivity with external resources.
+Access to DNS is essential for pods in a Kubernetes cluster because it enables service discovery, load balancing, and communication between pods using domain names. DNS allows pods to resolve domain names to IP addresses, facilitating seamless connectivity within the cluster and connectivity with external resources.
 
-Instead of creating a rule inside each security policy of each microservice, we will use the `GlobalNetworkPolicy` to give all pod access to the DNS service. This will help us to not repeat ourselves by writing the same rule on each policy.
+Instead of creating a rule inside each security policy of each microservice, we will use the `GlobalNetworkPolicy` to give all pod access to the DNS service. This will help us avoid repeating ourselves by writing the same rule on each policy.
 
-allow-dns - vote ns
+`allow-dns - vote ns`
 ```yaml
 kubectl apply -f - <<-EOF
 apiVersion: projectcalico.org/v3
@@ -216,9 +216,9 @@ spec:
 EOF
 ```
 
-Now let's create the policies for the microservices. For this we need to understand how they interact with each other. 
+Now let's create the policies for the microservices. For this, we need to understand how they interact with each other. 
 
-For each microservice there is a diagram, showing the other microservices that connects to it, or that it connects to, and the ports used. After the diagram you can find the security policy to be applied. Go over each of the microservice, applying the policies and observing the results on the application interface on the web.
+For each microservice, there is a diagram showing the other microservices that connects to it or that it connects to and the ports used. After the graph, you can find the security policy to be applied. Go over each microservice, apply the policies and observe the results on the application interface on the web.
 
 #### vote microservice
 

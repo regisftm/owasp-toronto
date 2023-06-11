@@ -109,9 +109,9 @@ Options:
    tigera-scanner scan website:v1.1.0
    ```
 
-   Observe the differences between both results. Older images have more vulnerabilities than new images.  
+   Observe the differences between both results. **Older images have more vulnerabilities than new images.**  
    
-> **Note**: **Keep your images updated!**
+> **Note**: **Keep your base images updated!**
    
 Next, let's learn how to implement security policies for your applications.
 
