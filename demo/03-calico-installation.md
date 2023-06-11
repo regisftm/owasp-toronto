@@ -1,6 +1,6 @@
 # 3 - Install and Configure the Calico CNI
 
-Install Calico to provide both networking and network policy for your self-managed deployment.
+Install Calico to provide both networking and network policy for your self-managed Kubernetes deployment.
 
 
 ### Calico Installation
