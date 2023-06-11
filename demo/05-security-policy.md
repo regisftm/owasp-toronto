@@ -4,7 +4,7 @@
 
 Kubernetes provides a framework for defining and applying policies to your cluster; however, it is up to the administrator to create and enforce those policies. Yet, on its own, Kubernetes doesn't enforce these policies. It delegates this to the container networking interface (CNI) plugin. 
 
-One of the default behaviours in Kubernetes is that all pods are allowed to communicate with each other. It means that if a pod runs a vulnerable application, other pods in the same cluster may also be at risk. To mitigate this risk, it is advisable to create network policies that restrict traffic between pods based on their labels. However, when you create a network policy, it changes the default behaviour to deny all traffic except what is explicitly allowed by the policy (with the assistance of your CNI). This implies that if a pod attempts to communicate with another pod not explicitly permitted by the policy, the communication will be denied.
+One of the default behaviours in Kubernetes is that all pods are allowed to communicate with each other. It means that if a pod runs a vulnerable application, other pods in the same cluster may also be at risk. To mitigate this risk, it is advisable to create network policies that restrict traffic between pods based on their labels. However, when you create a network policy, it changes the default behaviour to deny all traffic except what is explicitly allowed by the policy (with the assistance of your CNI). This implies that, if a pod attempts to communicate with another pod not explicitly permitted by the policy, the communication will be denied.
 
 ### Policy structure
 
@@ -24,7 +24,7 @@ kind: GlobalNetworkPolicy
 </pre>
 
 ### Rules
-Each policy can contain one or more rule; these rules can affect traffics that are incoming `ingress` or outgoing `egress`.
+Each policy can contain one or more rules; these rules can affect traffics that are incoming `ingress` or outgoing `egress`.
 
 An ingress rule example:
 
