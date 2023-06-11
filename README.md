@@ -22,7 +22,6 @@ If you have any questions, please contact me:
 
 - <img src="https://github.com/FortAwesome/Font-Awesome/blob/6.x/svgs/brands/linkedin.svg" width="15" height="15"> [LinkedIn](https://www.linkedin.com/in/regismartins/)
 
-
 ### Useful links
 
 - [Project Calico](https://www.tigera.io/project-calico/)
