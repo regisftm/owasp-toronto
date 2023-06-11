@@ -192,6 +192,8 @@ EOF
 
 Note that, despite the applied policy being a `GlobalNetworkPolicy`, we are restricting its action to the `vote` namespace using the `selector: projectcalico.org/namespace == 'vote'`. In this way, the traffic from and to any pod running inside the namespace `vote` will be denied.
 
+**Reload the vote and result applications on your browser. You should see a `ERR_CONNECTION_TIMED_OUT` message.**
+
 ### Allowing network connections
 
 Access to DNS is essential for pods in a Kubernetes cluster because it enables service discovery, load balancing, and communication between pods using domain names. DNS allows pods to resolve domain names to IP addresses, facilitating seamless connectivity within the cluster and connectivity with external resources.
