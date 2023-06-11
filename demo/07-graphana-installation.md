@@ -125,6 +125,16 @@ Use the Grafana dashboard to view Calico component metrics.
 
 ---
 
+## Clean up
+
+Go to the Terraform folder at `owasp-toronto/terraform` and use the command below.
+
+```bash
+terraform destroy --auto-approve
+```
+
+---
+
 [:leftwards_arrow_with_hook: Back to Main](/README.md) <br>
 
 [:arrow_left: 6 - Calico Components Metrics](/demo/06-calico-metrics.md)  
