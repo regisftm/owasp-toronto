@@ -219,6 +219,8 @@ Now let's create the policies for the microservices. For this, we need to unders
 
 For each microservice, there is a diagram showing the other microservices that connects to it or that it connects to and the ports used. After the graph, you can find the security policy to be applied. Go over each microservice, apply the policies and observe the results on the application interface on the web.
 
+---
+
 #### vote microservice
 
 ```mermaid
@@ -273,6 +275,8 @@ EOF
 ```
 
 Apply the policy and try to connect to the vote application again from your browser. What changed? Can you vote?
+
+---
 
 #### result microservice
 
@@ -329,6 +333,8 @@ EOF
 
 Try to connect to the result application again from your browser. What changed?
 
+---
+
 #### redis microservice
 
 ```mermaid
@@ -374,6 +380,7 @@ EOF
 
 Apply the policy and try to connect to the `vote` application again from your browser. What changed? Can you vote now?
 
+---
 
 #### db microservice
 
@@ -421,6 +428,8 @@ EOF
 ```
 
 Apply the policy and try to connect to the `result` application again from your browser. What changed?
+
+---
 
 #### worker microservice
 
@@ -472,6 +481,8 @@ EOF
 
 Apply the policy and connect to the `result` application again from your browser. What changed?
 
+---
+
 #### loadgenerator service
 
 ```mermaid
@@ -515,6 +526,7 @@ spec:
       - 80
 EOF
 ```
+--- 
 
 Apply the policy and connect to the `result` application again from your browser. Is the number of votes changing every 5 seconds?
 
