@@ -1,12 +1,12 @@
 # 4 - Scan Images for Vulnerabilities with **tigera-scanner**
 
-From now on we will work connected in the `control-plane` node. For convenience, I am assuming that all commands will be executed as `root`. To escalate your privilege, use:
+From this point forward, we will work directly on the control-plane node. Assume that all commands execute as the `root` user. To elevate your privileges, please use the following command:
 
 ```bash 
 sudo su - root
 ```
 
-Lets start by cloning a repository that contains two versions of a website and create the images from the Dockerfiles.
+Let's start by cloning a repository containing two website versions and creating the images from the Dockerfiles.
 
 1. Clone the website repo.
 
@@ -15,7 +15,7 @@ Lets start by cloning a repository that contains two versions of a website and c
    cd website
    ```
 
-   The directory structure of the website is as following:
+   The directory structure of the website is as follows:
 
    <pre>
    .
@@ -28,7 +28,7 @@ Lets start by cloning a repository that contains two versions of a website and c
        └── simple-website
    </pre>
 
-2. Build the images for the version v1.0.0 and v1.1.0. The main difference in the Dockerfile is that they use different versions for the base images. 
+2. Build the images for the versions v1.0.0 and v1.1.0. The main difference in the Dockerfile is that they use different versions for the base images. 
 
    `v1.0.0/Dockerfile`
    <pre>
@@ -63,7 +63,7 @@ Lets start by cloning a repository that contains two versions of a website and c
    docker build -t website:v1.1.0 v1.1.0/.
    ```
 
-   Verify that the images were built correctly.
+   Verify the correct build of the images.
 
    ```bash
    docker images
@@ -109,7 +109,7 @@ Options:
    tigera-scanner scan website:v1.1.0
    ```
 
-   Observe the differences between both results. Older images has more vulnerabilities than new images. 
+   Observe the differences between both results. Older images have more vulnerabilities than new images.  
    
    > **NOTE**: **Keep your images updated!**
    
