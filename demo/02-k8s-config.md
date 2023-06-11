@@ -55,6 +55,7 @@ After installing kubeadm, kubectl, and kubelet on both nodes and initializing th
 3. From the terminal connected to the control-plane, verify if the node successfully joined the cluster by running the following command as `root` (use `sudo su - root`):
 
    ```bash
+   sudo su - root
    kubectl get nodes
    ```
 
