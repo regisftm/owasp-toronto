@@ -29,15 +29,6 @@ Each policy can contain one or more rules; these rules can affect traffics that 
 An ingress rule example:
 
 ```yaml
-apiVersion: projectcalico.org/v3
-kind: NetworkPolicy
-metadata:
-  name: post-allow-list
-  namespace: microblog
-spec:
-  selector: svc == 'post'
-  types:
-    - Ingress
   ingress:
     - action: Allow
       source:
