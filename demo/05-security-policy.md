@@ -170,9 +170,9 @@ http://<contro_plane_public_ip>:30081
 
 ## The Zero Trust approach
 
-By default, all traffic is allowed between the pods in a cluster. A global default deny policy ensures that unwanted traffic (ingress and egress) is denied by default. Pods without policy (or incorrect policy) are not allowed traffic until the appropriate network policy is defined. A global deny policy helps mitigate lateral malicious attacks.
+By default, all traffic is allowed between the pods in a cluster. A global default deny policy ensures that unwanted traffic (ingress and egress) is denied by default. Pods without policy (or an incorrect policy) are not allowed traffic until the appropriate network policy is defined. A global deny policy helps mitigate lateral malicious attacks.
 
-We recommend creating a global default deny policy after you complete writing policies for the traffic you want to allow. For this exercise, as we will target only the vote namespace, let's apply the default-deny first and break the application. After, let's create all the needed policies, using the principle of least privilege, granting access only to what is required to have our application working again.
+We recommend creating a global default deny policy after you complete writing policies for the traffic you want to allow. For this exercise, as we are targeting the vote namespace only, let's apply the default-deny first and break the application. After, let's create all the needed policies, using the principle of least privilege, granting access only to what is required, to have our application working again.
 
 `default-deny - vote ns`
 ```yaml
