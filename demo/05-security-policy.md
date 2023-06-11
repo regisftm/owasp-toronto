@@ -381,7 +381,7 @@ spec:
 EOF
 ```
 
-Apply the policy and try to connect to the `vote` application again from your browser. What changed?
+Apply the policy and try to connect to the `vote` application again from your browser. What changed? Can you vote now?
 
 
 #### db microservice
@@ -527,7 +527,7 @@ EOF
 
 Apply the policy and connect to the `result` application again from your browser. Is the number of votes changing every 5 seconds?
 
-## **Congratulations! You have your application protected agains external and internal network attacks!**
+### **Congratulations! You have your application protected agains external and internal network attacks!**
 
 ---
 
