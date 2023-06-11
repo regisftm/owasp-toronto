@@ -1,8 +1,8 @@
-Calico Component Metrics
+# Calico Component Metrics
 
 Use Prometheus configured for Calico components to get valuable metrics about the health of Calico on a Graphana dashboard.
 
-Felix is a daemon that runs on every machine that implements network policy. Felix is the brains of Calico. Typha is an optional set of pods that extends Felix to scale traffic between Calico nodes and the datastore. The kube-controllers pod runs a set of controllers which are responsible for a variety of control plane functions, such as resource garbage collection and synchronization with the Kubernetes API.
+Felix is a daemon that runs on every machine that implements network policy. Felix is the brains of Calico. Typha is an optional set of pods that extends Felix to scale traffic between Calico nodes and the data store. The kube-controllers pod runs a set of controllers responsible for various control plane functions, such as resource garbage collection and synchronization with the Kubernetes API.
 
 You can configure Felix, Typha, and/or kube-controllers to provide metrics to Prometheus.
 
@@ -10,7 +10,7 @@ You can configure Felix, Typha, and/or kube-controllers to provide metrics to Pr
    
 1. Felix configuration
 
-   Felix prometheus metrics are disabled by default. Use the following command to enable Felix metrics.
+   Felix Prometheus metrics are disabled by default. Use the following command to enable Felix metrics.
 
    ```bash
    kubectl patch felixconfiguration default --type merge --patch '{"spec":{"prometheusMetricsEnabled": true}}'
@@ -18,7 +18,7 @@ You can configure Felix, Typha, and/or kube-controllers to provide metrics to Pr
 
 2. Creating a service to expose Felix metrics
    
-   Prometheus uses Kubernetes services to dynamically discover endpoints. Here you will create a service named felix-metrics-svc which Prometheus will use to discover all the Felix metrics endpoints. Felix by default uses port 9091 TCP to publish its metrics.
+   Prometheus uses Kubernetes services to discover endpoints dynamically. Here you will create a service named felix-metrics-svc which Prometheus will use to discover all the Felix metrics endpoints. Felix, by default, uses port 9091 TCP to publish its metrics.
 
    ```yaml
    kubectl apply -f - <<EOF
@@ -39,7 +39,7 @@ You can configure Felix, Typha, and/or kube-controllers to provide metrics to Pr
 
 3. Typha Configuration
    
-   An Operator installation of Calico automatically deploys one or more Typha instances depending on the scale of your cluster. By default metrics for these instances are disabled.
+   An Operator installation of Calico automatically deploys one or more Typha instances depending on the scale of your cluster. By default, metrics for these instances are disabled.
 
    Use the following command to instruct tigera-operator to enable Typha metrics.
 
@@ -49,7 +49,7 @@ You can configure Felix, Typha, and/or kube-controllers to provide metrics to Pr
 
 4. Creating a service to expose Typha metrics
 
-   Typha uses port 9091 TCP by default to publish its metrics. However, if Calico is installed using yaml file this port will be 9093 as its set manually via TYPHA_PROMETHEUSMETRICSPORT environment variable.
+   Typha uses port 9091 TCP by default to publish its metrics. However, if Calico is installed using yaml file, this port will be 9093 as its set manually via `TYPHA_PROMETHEUSMETRICSPORT` environment variable.
 
    ```yaml
    kubectl apply -f - <<EOF
@@ -106,7 +106,7 @@ You can configure Felix, Typha, and/or kube-controllers to provide metrics to Pr
 
 2. Service account creation
 
-   You need to provide Prometheus a serviceAccount with required permissions to collect information from Calico.
+   You need to provide Prometheus a service account with the required permissions to collect information from Calico.
 
    ```yaml
    kubectl apply -f - <<EOF
@@ -208,7 +208,7 @@ You can configure Felix, Typha, and/or kube-controllers to provide metrics to Pr
 
 2. Create Prometheus pod
 
-   Now that you have a serviceaccount with permissions to gather metrics and have a valid config file for your Prometheus, it's time to create the Prometheus pod.
+   Now that you have a service account with permissions to gather metrics and have a valid config file for your Prometheus, it's time to create the Prometheus pod.
 
    ```yaml
    kubectl apply -f - <<EOF
@@ -257,7 +257,7 @@ You can configure Felix, Typha, and/or kube-controllers to provide metrics to Pr
 
 ## View metrics
 
-Create a nodeport service to expose your prometheus dashboard. 
+Create a nodeport service to expose your Prometheus dashboard. 
 
 ```yaml
 kubectl apply -f - <<EOF
@@ -282,13 +282,13 @@ spec:
 EOF
 ```
 
-Browse to http://<control-plane_public_ip>:9090 and you should be able to see the Prometheus dashboard. Type `felix_active_local_endpoints` in the Expression input textbox then hit the execute button. Console table should be populated with all your nodes and quantity of endpoints in each of them.
+Browse to http://<control-plane_public_ip>:9090 and you should be able to see the Prometheus dashboard. Type `felix_active_local_endpoints` in the Expression input textbox, then hit the execute button. The console table should be populated with all your nodes and the quantity of endpoints in each of them.
 
-> **NOTE** : A list of Felix metrics can be [found at this link](https://docs.tigera.io/calico/latest/reference/felix/prometheus). Similar lists can be found for kube-controllers and Typha.
+> **Note** : A list of Felix metrics can be [found at this link](https://docs.tigera.io/calico/latest/reference/felix/prometheus). Similar lists can be found for kube-controllers and Typha.
 
-Push the `Add Graph` button, You should be able to see the metric plotted on a Graph.
+Push the `Add Graph` button. You should be able to see the metric plotted on a Graph.
 
-Now you can install and configure Graphana to vizualise the Calico statistics.
+Now you can install and configure Graphana to visualise the Calico statistics.
 
 ---
 
