@@ -89,7 +89,7 @@ For example, if you have two unordered policies named `alpha` and `zulu`, the po
 Calico allows you to create iptable log rules to log packets that match specific criteria. These log rules can be assigned an order number like other policies, but it is important to note that the policy that comes after a log rule will be the final decider and no other policies will be evaluated. Therefore, you should ensure the policy after a log rule is configured correctly to avoid unintended consequences. 
 
 
-## Preventing a lockout
+#### Preventing a lockout
 As a best practice, whenever you are trying to experiment with policies in any environment, it is best to implement a `safe-mode` strategy by first explicitly permitting the traffic and then writing your deny rules. This helps to eliminate the chance of accidentally locking yourself out of a cluster if a misconfigured policy is applied.
 
 Use the following command to explicitly allow every traffic in and out of your cluster:
@@ -111,6 +111,7 @@ EOF
 
 It is worth mentioning that Calico also implements a default fail-safe, a policy with a list of essential ports and services required for your cluster to function. Click [here](https://docs.tigera.io/calico/latest/network-policy/hosts/protect-hosts#failsafe-rules), if you like to know more about Calico's fail-safe.
 
+--- 
 
 # Protect an example application
 
