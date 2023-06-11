@@ -1,6 +1,6 @@
 # 1 - Infrastructure for the Demo
 
-The environment for the demonstration was built on AWS using Terraform. If you desire to become more familiar with Terraform, it's time! : ) You will need an AWS account and Terraform installed on your computer.
+The environment for the demonstration was built on AWS using Terraform. If you want to become more familiar with Terraform, it's time! : ) You will need an AWS account and Terraform installed on your computer.
 
 1. Start by cloning this repository:
 
