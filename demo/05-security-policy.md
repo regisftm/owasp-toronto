@@ -145,10 +145,10 @@ subgraph Cluster
 end
 ```
 
-Install the application by returning to the `owasp-toronto` directory and applying the following command:
+Install the application by using the following command:
 
 ```bash
-kubectl apply -f vote-app
+kubectl apply -f https://raw.githubusercontent.com/regisftm/owasp-toronto/main/vote-app/kubernetes-manifest.yaml
 ```
 
 The services `vote` and `result` will expose the application to the internet. To access them, use the public IP address of the control-plane instance. The application will be exposed on the ports: `30080` for `vote` service and `30081` for the `result` service. Use HTTP protocol, as the applications are not secure.
