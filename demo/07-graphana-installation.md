@@ -2,27 +2,6 @@
 
 Use the Grafana dashboard to view Calico component metrics.
 
-## Preparing Prometheus
-
-Create a service to make your Prometheus visible to Grafana.
-
-```bash
-kubectl apply -f - <<EOF
-apiVersion: v1
-kind: Service
-metadata:
-  name: prometheus-dashboard-svc
-  namespace: calico-monitoring
-spec:
-  selector:
-      app:  prometheus-pod
-      role: monitoring
-  ports:
-  - port: 9090
-    targetPort: 9090
-EOF
-```
-
 ## Preparing Grafana pod
 
 1. Provisioning datasource
@@ -138,11 +117,11 @@ EOF
 
    > **Note** : Both `username` and `password` are `admin`.
 
-   After login, you will be prompted to change the default password. You can change it (recommended), click `Save` or `Skip`, and do it later from settings.
+   After login, you will be prompted to change the default password. You can change it (recommended), click `Submit` or `Skip`, and do it later from settings.
 
 ---
 
-# Congratulation, you have arrived at the end of the demo! I hope you have enjoyed it!
+### Congratulation, you have arrived at the end of the demo! I hope you have enjoyed it!
 
 ---
 
