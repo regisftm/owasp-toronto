@@ -282,11 +282,17 @@ spec:
 EOF
 ```
 
-Browse to http://<control-plane_public_ip>:9090 and you should be able to see the Prometheus dashboard. Type `felix_active_local_endpoints` in the Expression input textbox, then hit the execute button. The console table should be populated with all your nodes and the quantity of endpoints in each of them.
+Browse to `http://<control-plane_public_ip>:30090` and you should be able to see the Prometheus dashboard. Type `felix_active_local_endpoints` in the Expression input textbox, then hit the execute button. The console table should be populated with all your nodes and the quantity of endpoints in each of them.
 
 > **Note** : A list of Felix metrics can be [found at this link](https://docs.tigera.io/calico/latest/reference/felix/prometheus). Similar lists can be found for kube-controllers and Typha.
 
-Push the `Add Graph` button. You should be able to see the metric plotted on a Graph.
+1. Insert `{__name__=~".+"}` in to the Expression search and `Execute`. You will be able to see all the statistics being retrieved.
+
+2. Clique on `Graph`, paste the following in the search bar and execute.
+
+   ```promql
+   rate(prometheus_http_response_size_bytes_sum{handler="/api/v1/query", instance="localhost:9090", job="prometheus"}[5m])
+   ```
 
 Now you can install and configure Graphana to visualise the Calico statistics.
 
