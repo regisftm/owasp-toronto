@@ -15,7 +15,7 @@ Developing a standard and scalable security design for their Kubernetes environm
 
 In conclusion, application modernization is a strategic initiative that can transform businesses. Developing a standard and scalable security design for the Kubernetes environment is critical to establishing the framework for implementing the necessary checks, enforcement, and visibility to enable strategic business objectives.
 
-- [Download the presentation](/artifacts/presentation-placeholder.pdf)  
+- [Download the presentation](/artifacts/Presentation%20-%20OWASP%20Toronto%20-%20Regis%20Martins.pdf)  
 - [Steps to reproduce the Demonstration](/demo/01-infrastructure.md)
 
 If you have any questions, please contact me: 
