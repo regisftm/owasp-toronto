@@ -32,7 +32,7 @@ Let's start by cloning a repository containing two website versions and creating
 
    `v1.0.0/Dockerfile`
    <pre>
-   FROM nginx:1.24.0-alpine
+   FROM nginx:1.23.3-alpine
 
    COPY simple-website/ /usr/share/nginx/html/
 
@@ -45,7 +45,7 @@ Let's start by cloning a repository containing two website versions and creating
 
    `v1.1.0/Dockerfile`
    <pre>
-   FROM nginx:1.25.0-alpine
+   FROM nginx:1.25.1-alpine
 
    COPY simple-website/ /usr/share/nginx/html/
 
@@ -72,11 +72,11 @@ Let's start by cloning a repository containing two website versions and creating
    You should see the following output:
 
    <pre>
-   REPOSITORY   TAG                      IMAGE ID       CREATED             SIZE
-   website      v1.1.0                   deee02ec4ab8   21 seconds ago      41.4MB
-   website      v1.0.0                   2d1505fdb51b   20 seconds ago      41.1MB
-   nginx        1.25.0-alpine            fe7edaf8a8dc   2 weeks ago         41.4MB
-   nginx        1.24.0-alpine            1266a3a46e96   8 weeks ago         41.1MB
+   REPOSITORY   TAG             IMAGE ID       CREATED          SIZE
+   website      v1.1.0          96b111ed81cb   5 seconds ago    44.8MB
+   website      v1.0.0          6a395cb93af9   8 seconds ago    44.1MB
+   nginx        1.25.1-alpine   4937520ae206   31 minutes ago   41.4MB
+   nginx        1.23.3-alpine   2bc7edbc3cf2   4 months ago     40.7MB
    </pre>
 
 ### Scan images using CLI
